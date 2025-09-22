@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Rosario - Jardín de Flores Amarillas</title>
+    <style>
+        *,
+        *::after,
+        *::before {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-color: #1a0d00;
+            --yellow-bright: #ffeb3b;
+            --yellow-gold: #ffc107;
+            --yellow-deep: #ff8f00;
+        }
+
+        body {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2c1810 0%, #1a0d00 50%, #0d0500 100%);
+            overflow: hidden;
+            perspective: 1000px;
+            font-family: 'Georgia', serif;
+        }
+
+        .night {
+            position: fixed;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, #2c1810 0%, #1a0d00 40%, #0d0500 100%);
+        }
+
+        .romantic-sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, var(--yellow-bright), transparent);
+            border-radius: 50%;
+            animation: sparkleAnimation 3s infinite ease-in-out;
+        }
+
+        .sparkle:nth-child(1) { top: 25%; left: 20%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 40%; left: 75%; animation-delay: 0.5s; }
+        .sparkle:nth-child(3) { top: 60%; left: 15%; animation-delay: 1s; }
+        .sparkle:nth-child(4) { top: 30%; left: 85%; animation-delay: 1.5s; }
+        .sparkle:nth-child(5) { top: 50%; left: 45%; animation-delay: 2s; }
+        .sparkle:nth-child(6) { top: 70%; left: 65%; animation-delay: 2.5s; }
+        .sparkle:nth-child(7) { top: 35%; left: 55%; animation-delay: 0.8s; }
+        .sparkle:nth-child(8) { top: 55%; left: 30%; animation-delay: 1.8s; }
+        .sparkle:nth-child(9) { top: 20%; left: 70%; animation-delay: 1.2s; }
+        .sparkle:nth-child(10) { top: 65%; left: 80%; animation-delay: 2.2s; }
+
+        @keyframes sparkleAnimation {
+            0%, 100% { 
+                opacity: 0; 
+                transform: scale(0.5); 
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.5); 
+                box-shadow: 0 0 10px var(--yellow-bright);
+            }
+        }
+
+        .love-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .love-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--yellow-gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: loveParticleFloat 6s infinite linear;
+        }
+
+        .love-particle:nth-child(1) { left: 5%; animation-delay: 0s; }
+        .love-particle:nth-child(2) { left: 15%; animation-delay: 1s; }
+        .love-particle:nth-child(3) { left: 25%; animation-delay: 2s; }
+        .love-particle:nth-child(4) { left: 35%; animation-delay: 3s; }
+        .love-particle:nth-child(5) { left: 45%; animation-delay: 4s; }
+        .love-particle:nth-child(6) { left: 55%; animation-delay: 5s; }
+        .love-particle:nth-child(7) { left: 65%; animation-delay: 0.5s; }
+        .love-particle:nth-child(8) { left: 75%; animation-delay: 1.5s; }
+        .love-particle:nth-child(9) { left: 85%; animation-delay: 2.5s; }
+        .love-particle:nth-child(10) { left: 95%; animation-delay: 3.5s; }
+
+        @keyframes loveParticleFloat {
+            0% {
+                bottom: -10px;
+                opacity: 0;
+                transform: translateX(0px) scale(0.5);
+            }
+            20% {
+                opacity: 1;
+                transform: translateX(10px) scale(1);
+            }
+            80% {
+                opacity: 1;
+                transform: translateX(-10px) scale(1);
+            }
+            100% {
+                bottom: 100vh;
+                opacity: 0;
+                transform: translateX(20px) scale(0.5);
+            }
+        }
+
+        .moon {
+            position: absolute;
+            top: 15%;
+            right: 10%;
+            width: 8vmin;
+            height: 8vmin;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fff, #f5f5dc);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 
+                        0 0 40px rgba(255, 255, 255, 0.3),
+                        0 0 60px rgba(255, 255, 255, 0.2);
+            animation: moonGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes moonGlow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 
+                           0 0 40px rgba(255, 255, 255, 0.3),
+                           0 0 60px rgba(255, 255, 255, 0.2);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 
+                           0 0 60px rgba(255, 255, 255, 0.5),
+                           0 0 100px rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        .star:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+        .star:nth-child(2) { top: 30%; left: 80%; animation-delay: 0.5s; }
+        .star:nth-child(3) { top: 25%; left: 60%; animation-delay: 1s; }
+        .star:nth-child(4) { top: 15%; left: 40%; animation-delay: 1.5s; }
+        .star:nth-child(5) { top: 35%; left: 25%; animation-delay: 2s; }
+        .star:nth-child(6) { top: 20%; left: 70%; animation-delay: 2.5s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 18px;
+            opacity: 0;
+            animation: floatHeart 8s infinite linear;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 16px;
+            background: var(--yellow-gold);
+            border-radius: 10px 10px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart::after {
+            left: 10px;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .heart:nth-child(2) { left: 20%; animation-delay: 2s; }
+        .heart:nth-child(3) { left: 30%; animation-delay: 4s; }
+        .heart:nth-child(4) { left: 40%; animation-delay: 6s; }
+        .heart:nth-child(5) { left: 50%; animation-delay: 1s; }
+        .heart:nth-child(6) { left: 60%; animation-delay: 3s; }
+        .heart:nth-child(7) { left: 70%; animation-delay: 5s; }
+        .heart:nth-child(8) { left: 80%; animation-delay: 7s; }
+        .heart:nth-child(9) { left: 90%; animation-delay: 1.5s; }
+
+        @keyframes floatHeart {
+            0% {
+                bottom: -50px;
+                opacity: 0;
+                transform: translateX(0px) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                bottom: 100vh;
+                opacity: 0;
+                transform: translateX(50px) rotate(180deg);
+            }
+        }
+
+        .poem {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: var(--yellow-bright);
+            z-index: 1000;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            animation: fadeInPoem 3s ease-in-out;
+        }
+
+        .poem h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--yellow-gold);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+        }
+
+        .poem-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes fadeInPoem {
+            0% { opacity: 0; transform: translateX(-50%) translateY(-30px); }
+            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        .flowers {
+            position: relative;
+            transform: scale(0.9);
+        }
+
+        .flower {
+            position: absolute;
+            bottom: 10vmin;
+            transform-origin: bottom center;
+            z-index: 10;
+            --fl-speed: 0.8s;
+        }
+
+        /* Flower 1 */
+        .flower--1 {
+            left: -15vmin;
+            animation: moving-flower-1 4s linear infinite;
+        }
+        .flower--1 .flower__line {
+            height: 70vmin;
+            animation-delay: 0.3s;
+        }
+
+        /* Flower 2 */
+        .flower--2 {
+            left: 50%;
+            transform: rotate(20deg);
+            animation: moving-flower-2 4s linear infinite;
+        }
+        .flower--2 .flower__line {
+            height: 60vmin;
+            animation-delay: 0.6s;
+        }
+
+        /* Flower 3 */
+        .flower--3 {
+            left: 50%;
+            transform: rotate(-15deg);
+            animation: moving-flower-3 4s linear infinite;
+        }
+        .flower--3 .flower__line {
+            animation-delay: 0.9s;
+        }
+
+        /* Nuevas flores adicionales */
+        .flower--4 {
+            left: -30vmin;
+            transform: rotate(10deg);
+            animation: moving-flower-1 3.5s linear infinite;
+        }
+        .flower--4 .flower__line {
+            height: 55vmin;
+            animation-delay: 1.2s;
+        }
+
+        .flower--5 {
+            left: 70%;
+            transform: rotate(-25deg);
+            animation: moving-flower-2 4.5s linear infinite;
+        }
+        .flower--5 .flower__line {
+            height: 65vmin;
+            animation-delay: 1.5s;
+        }
+
+        .flower--6 {
+            left: -45vmin;
+            transform: rotate(5deg);
+            animation: moving-flower-3 3.8s linear infinite;
+        }
+        .flower--6 .flower__line {
+            height: 50vmin;
+            animation-delay: 1.8s;
+        }
+
+        .flower--7 {
+            left: 85%;
+            transform: rotate(-10deg);
+            animation: moving-flower-1 4.2s linear infinite;
+        }
+        .flower--7 .flower__line {
+            height: 58vmin;
+            animation-delay: 2.1s;
+        }
+
+        .flower--8 {
+            left: -60vmin;
+            transform: rotate(15deg);
+            animation: moving-flower-2 3.2s linear infinite;
+        }
+        .flower--8 .flower__line {
+            height: 45vmin;
+            animation-delay: 2.4s;
+        }
+
+        .flower--9 {
+            left: 95%;
+            transform: rotate(-30deg);
+            animation: moving-flower-3 4.8s linear infinite;
+        }
+        .flower--9 .flower__line {
+            height: 52vmin;
+            animation-delay: 2.7s;
+        }
+
+        .flower--10 {
+            left: -75vmin;
+            transform: rotate(25deg);
+            animation: moving-flower-1 3.6s linear infinite;
+        }
+        .flower--10 .flower__line {
+            height: 48vmin;
+            animation-delay: 3.0s;
+        }
+
+        .flower--11 {
+            left: 110%;
+            transform: rotate(-5deg);
+            animation: moving-flower-2 4.4s linear infinite;
+        }
+        .flower--11 .flower__line {
+            height: 55vmin;
+            animation-delay: 3.3s;
+        }
+
+        .flower--12 {
+            left: -90vmin;
+            transform: rotate(8deg);
+            animation: moving-flower-3 3.8s linear infinite;
+        }
+        .flower--12 .flower__line {
+            height: 42vmin;
+            animation-delay: 3.6s;
+        }
+
+        .flower__leafs {
+            position: relative;
+            animation: blooming-flower 2s backwards;
+        }
+        .flower__leafs--1 { animation-delay: 1.1s; }
+        .flower__leafs--2 { animation-delay: 1.4s; }
+        .flower__leafs--3 { animation-delay: 1.7s; }
+        .flower__leafs--4 { animation-delay: 2.0s; }
+        .flower__leafs--5 { animation-delay: 2.3s; }
+        .flower__leafs--6 { animation-delay: 2.6s; }
+        .flower__leafs--7 { animation-delay: 2.9s; }
+        .flower__leafs--8 { animation-delay: 3.2s; }
+        .flower__leafs--9 { animation-delay: 3.5s; }
+        .flower__leafs--10 { animation-delay: 3.8s; }
+        .flower__leafs--11 { animation-delay: 4.1s; }
+        .flower__leafs--12 { animation-delay: 4.4s; }
+
+        .flower__leafs::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            transform: translate(-50%, -100%);
+            width: 8vmin;
+            height: 8vmin;
+            background-color: var(--yellow-gold);
+            filter: blur(10vmin);
+        }
+
+        .flower__leaf {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 8vmin;
+            height: 11vmin;
+            border-radius: 51% 49% 47% 53%/44% 45% 55% 69%;
+            background: linear-gradient(145deg, var(--yellow-bright), var(--yellow-gold));
+            transform-origin: bottom center;
+            opacity: 0.9;
+            box-shadow: inset 0 0 2vmin rgba(255, 255, 255, 0.5);
+        }
+
+        .flower__leaf--1 { transform: translate(-10%, 1%) rotateY(40deg) rotateX(-50deg); }
+        .flower__leaf--2 { transform: translate(-50%, -4%) rotateX(40deg); }
+        .flower__leaf--3 { transform: translate(-90%, 0%) rotateY(45deg) rotateX(50deg); }
+        .flower__leaf--4 {
+            width: 8vmin;
+            height: 8vmin;
+            transform-origin: bottom left;
+            border-radius: 4vmin 10vmin 4vmin 4vmin;
+            transform: translate(0%, 18%) rotateX(70deg) rotate(-43deg);
+            background: linear-gradient(145deg, var(--yellow-bright), var(--yellow-deep));
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        .flower__white-circle {
+            position: absolute;
+            left: -3.5vmin;
+            top: -3vmin;
+            width: 9vmin;
+            height: 4vmin;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff 30%, var(--yellow-gold) 70%);
+        }
+
+        .flower__white-circle::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 45%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 60%;
+            border-radius: inherit;
+            background: linear-gradient(45deg, var(--yellow-deep), var(--yellow-gold));
+        }
+
+        .flower__line {
+            height: 55vmin;
+            width: 1.5vmin;
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent, rgba(255, 255, 255, 0.2)), 
+                        linear-gradient(to top, transparent 10%, #2e7d32, #388e3c);
+            box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+            animation: grow-flower-tree 4s backwards;
+        }
+
+        .flower__line__leaf {
+            --w: 7vmin;
+            --h: calc(var(--w) + 2vmin);
+            position: absolute;
+            top: 20%;
+            left: 90%;
+            width: var(--w);
+            height: var(--h);
+            border-top-right-radius: var(--h);
+            border-bottom-left-radius: var(--h);
+            background: linear-gradient(to top, rgba(46, 125, 50, 0.4), #4caf50);
+        }
+
+        .flower__light {
+            position: absolute;
+            bottom: 0vmin;
+            width: 1vmin;
+            height: 1vmin;
+            background-color: var(--yellow-bright);
+            border-radius: 50%;
+            filter: blur(0.2vmin);
+            animation: light-ans 4s linear infinite backwards;
+        }
+
+        .flower__light:nth-child(odd) {
+            background-color: var(--yellow-gold);
+        }
+
+        .flower__light--1 { left: -2vmin; animation-delay: 1s; }
+        .flower__light--2 { left: 3vmin; animation-delay: 0.5s; }
+        .flower__light--3 { left: -6vmin; animation-delay: 0.3s; }
+        .flower__light--4 { left: 6vmin; animation-delay: 0.9s; }
+        .flower__light--5 { left: -1vmin; animation-delay: 1.5s; }
+        .flower__light--6 { left: -4vmin; animation-delay: 3s; }
+        .flower__light--7 { left: 3vmin; animation-delay: 2s; }
+        .flower__light--8 { left: -6vmin; animation-delay: 3.5s; }
+
+        /* Animaciones */
+        @keyframes moving-flower-1 {
+            0%, 100% { transform: rotate(2deg); }
+            50% { transform: rotate(-2deg); }
+        }
+
+        @keyframes moving-flower-2 {
+            0%, 100% { transform: rotate(18deg); }
+            50% { transform: rotate(14deg); }
+        }
+
+        @keyframes moving-flower-3 {
+            0%, 100% { transform: rotate(-18deg); }
+            50% { transform: rotate(-20deg) rotateY(-10deg); }
+        }
+
+        @keyframes grow-flower-tree {
+            0% { height: 0; border-radius: 1vmin; }
+        }
+
+        @keyframes blooming-flower {
+            0% { transform: scale(0); }
+        }
+
+        @keyframes light-ans {
+            0% { opacity: 0; transform: translateY(0vmin); }
+            25% { opacity: 1; transform: translateY(-5vmin) translateX(-2vmin); }
+            50% { opacity: 1; transform: translateY(-15vmin) translateX(2vmin); filter: blur(0.2vmin); }
+            75% { transform: translateY(-20vmin) translateX(-2vmin); filter: blur(0.2vmin); }
+            100% { transform: translateY(-30vmin); opacity: 0; filter: blur(1vmin); }
+        }
+
+        .container * {
+            animation-play-state: paused !important;
+        }
+
+        @media (max-width: 768px) {
+            .poem h1 { font-size: 2.5rem; }
+            .poem-text { font-size: 1.1rem; padding: 15px; }
+        }
+    </style>
+</head>
+<body class="container">
+    <div class="night"></div>
+    
+    <div class="romantic-sparkles">
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+    </div>
+    
+    <div class="love-particles">
+        <div class="love-particle"></div>
+        <div class="love-particle"></div>
+        <div class="love-particle"></div>
+        <div class="love-particle"></div>
+        <div class="love-particle"></div>
+        <div class="love-particle"></div>
+        <div class="love-particle"></div>
+        <div class="love-particle"></div>
+        <div class="love-particle"></div>
+        <div class="love-particle"></div>
+    </div>
+    
+    <div class="moon"></div>
+    
+    <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+    
+    <div class="floating-hearts">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+    </div>
+    
+    <div class="poem">
+        <h1>Para Rosario</h1>
+        <div class="poem-text">
+            Bajo esta luna tierna que compartimos,<br>
+            florecen mil amores en cada estrella.<br>
+            Rosario, la lejania no impide amarte<br>
+            eres la poesía que vive en mi corazon.<br><br>
+            
+            Este jardin virtual florecen para ti,<br>
+            como nuestro amor florece cada dia.<br>
+            Eres la razon mas bonita para amar,<br>
+            mi amor por ti nunca dejara de brillar.<br><br>
+        
+        </div>
+    </div>
+
+    <div class="flowers">
+        <!-- Flower 1 -->
+        <div class="flower flower--1">
+            <div class="flower__leafs flower__leafs--1">
+                <div class="flower__leaf flower__leaf--1"></div>
+                <div class="flower__leaf flower__leaf--2"></div>
+                <div class="flower__leaf flower__leaf--3"></div>
+                <div class="flower__leaf flower__leaf--4"></div>
+                <div class="flower__white-circle"></div>
+                <div class="flower__light flower__light--1"></div>
+                <div class="flower__light flower__light--2"></div>
+                <div class="flower__light flower__light--3"></div>
+                <div class="flower__light flower__light--4"></div>
+                <div class="flower__light flower__light--5"></div>
+                <div class="flower__light flower__light--6"></div>
+                <div class="flower__light flower__light--7"></div>
+                <div class="flower__light flower__light--8"></div>
+            </div>
+            <div class="flower__line"></div>
+        </div>
+
+        <!-- Flower 2 -->
+        <div class="flower flower--2">
+            <div class="flower__leafs flower__leafs--2">
+                <div class="flower__leaf flower__leaf--1"></div>
+                <div class="flower__leaf flower__leaf--2"></div>
+                <div class="flower__leaf flower__leaf--3"></div>
+                <div class="flower__leaf flower__leaf--4"></div>
+                <div class="flower__white-circle"></div>
+                <div class="flower__light flower__light--1"></div>
+                <div class="flower__light flower__light--2"></div>
+                <div class="flower__light flower__light--3"></div>
+                <div class="flower__light flower__light--4"></div>
+                <div class="flower__light flower__light--5"></div>
+                <div class="flower__light flower__light--6"></div>
+                <div class="flower__light flower__light--7"></div>
+                <div class="flower__light flower__light--8"></div>
+            </div>
+            <div class="flower__line"></div>
+        </div>
+
+        <!-- Flower 3 -->
+        <div class="flower flower--3">
+            <div class="flower__leafs flower__leafs--3">
+                <div class="flower__leaf flower__leaf--1"></div>
+                <div class="flower__leaf flower__leaf--2"></div>
+                <div class="flower__leaf flower__leaf--3"></div>
+                <div class="flower__leaf flower__leaf--4"></div>
+                <div class="flower__white-circle"></div>
+                <div class="flower__light flower__light--1"></div>
+                <div class="flower__light flower__light--2"></div>
+                <div class="flower__light flower__light--3"></div>
+                <div class="flower__light flower__light--4"></div>
+                <div class="flower__light flower__light--5"></div>
+                <div class="flower__light flower__light--6"></div>
+                <div class="flower__light flower__light--7"></div>
+                <div class="flower__light flower__light--8"></div>
+            </div>
+            <div class="flower__line"></div>
+        </div>
+
+        <!-- Flower 4 -->
+        <div class="flower flower--4">
+            <div class="flower__leafs flower__leafs--4">
+                <div class="flower__leaf flower__leaf--1"></div>
+                <div class="flower__leaf flower__leaf--2"></div>
+                <div class="flower__leaf flower__leaf--3"></div>
+                <div class="flower__leaf flower__leaf--4"></div>
+                <div class="flower__white-circle"></div>
+                <div class="flower__light flower__light--1"></div>
+                <div class="flower__light flower__light--2"></div>
+                <div class="flower__light flower__light--3"></div>
+                <div class="flower__light flower__light--4"></div>
+            </div>
+            <div class="flower__line"></div>
+        </div>
+
+        <!-- Flower 5 -->
+        <div class="flower flower--5">
+            <div class="flower__leafs flower__leafs--5">
+                <div class="flower__leaf flower__leaf--1"></div>
+                <div class="flower__leaf flower__leaf--2"></div>
+                <div class="flower__leaf flower__leaf--3"></div>
+                <div class="flower__leaf flower__leaf--4"></div>
+                <div class="flower__white-circle"></div>
+                <div class="flower__light flower__light--1"></div>
+                <div class="flower__light flower__light--2"></div>
+                <div class="flower__light flower__light--3"></div>
+                <div class="flower__light flower__light--4"></div>
+            </div>
+            <div class="flower__line"></div>
+        </div>
+
+        <!-- Flower 6 -->
+        <div class="flower flower--6">
+            <div class="flower__leafs flower__leafs--6">
+                <div class="flower__leaf flower__leaf--1"></div>
+                <div class="flower__leaf flower__leaf--2"></div>
+                <div class="flower__leaf flower__leaf--3"></div>
+                <div class="flower__leaf flower__leaf--4"></div>
+                <div class="flower__white-circle"></div>
+                <div class="flower__light flower__light--1"></div>
+                <div class="flower__light flower__light--2"></div>
+            </div>
+            <div class="flower__line"></div>
+        </div>
+
+        <!-- Flower 7 -->
+        <div class="flower flower--7">
+            <div class="flower__leafs flower__leafs--7">
+                <div class="flower__leaf flower__leaf--1"></div>
+                <div class="flower__leaf flower__leaf--2"></div>
+                <div class="flower__leaf flower__leaf--3"></div>
+                <div class="flower__leaf flower__leaf--4"></div>
+                <div class="flower__white-circle"></div>
+                <div class="flower__light flower__light--1"></div>
+                <div class="flower__light flower__light--2"></div>
+            </div>
+            <div class="flower__line"></div>
+        </div>
+
+        <!-- Flower 8 -->
+        <div class="flower flower--8">
+            <div class="flower__leafs flower__leafs--8">
+                <div class="flower__leaf flower__leaf--1"></div>
+                <div class="flower__leaf flower__leaf--2"></div>
+                <div class="flower__leaf flower__leaf--3"></div>
+                <div class="flower__leaf flower__leaf--4"></div>
+                <div class="flower__white-circle"></div>
+                <div class="flower__light flower__light--1"></div>
+                <div class="flower__light flower__light--2"></div>
+            </div>
+            <div class="flower__line"></div>
+        </div>
+
+        <!-- Flower 9 -->
+        <div class="flower flower--9">
+            <div class="flower__leafs flower__leafs--9">
+                <div class="flower__leaf flower__leaf--1"></div>
+                <div class="flower__leaf flower__leaf--2"></div>
+                <div class="flower__leaf flower__leaf--3"></div>
+                <div class="flower__leaf flower__leaf--4"></div>
+                <div class="flower__white-circle"></div>
+                <div class="flower__light flower__light--1"></div>
+                <div class="flower__light flower__light--2"></div>
+            </div>
+            <div class="flower__line"></div>
+        </div>
+
+        <!-- Flower 10 -->
+        <div class="flower flower--10">
+            <div class="flower__leafs flower__leafs--10">
+                <div class="flower__leaf flower__leaf--1"></div>
+                <div class="flower__leaf flower__leaf--2"></div>
+                <div class="flower__leaf flower__leaf--3"></div>
+                <div class="flower__leaf flower__leaf--4"></div>
+                <div class="flower__white-circle"></div>
+                <div class="flower__light flower__light--1"></div>
+                <div class="flower__light flower__light--2"></div>
+            </div>
+            <div class="flower__line"></div>
+        </div>
+
+        <!-- Flower 11 -->
+        <div class="flower flower--11">
+            <div class="flower__leafs flower__leafs--11">
+                <div class="flower__leaf flower__leaf--1"></div>
+                <div class="flower__leaf flower__leaf--2"></div>
+                <div class="flower__leaf flower__leaf--3"></div>
+                <div class="flower__leaf flower__leaf--4"></div>
+                <div class="flower__white-circle"></div>
+                <div class="flower__light flower__light--1"></div>
+                <div class="flower__light flower__light--2"></div>
+            </div>
+            <div class="flower__line"></div>
+        </div>
+
+        <!-- Flower 12 -->
+        <div class="flower flower--12">
+            <div class="flower__leafs flower__leafs--12">
+                <div class="flower__leaf flower__leaf--1"></div>
+                <div class="flower__leaf flower__leaf--2"></div>
+                <div class="flower__leaf flower__leaf--3"></div>
+                <div class="flower__leaf flower__leaf--4"></div>
+                <div class="flower__white-circle"></div>
+                <div class="flower__light flower__light--1"></div>
+                <div class="flower__light flower__light--2"></div>
+            </div>
+            <div class="flower__line"></div>
+        </div>
+    </div>
+
+    <script>
+        onload = () => {
+            document.body.classList.remove("container");
+        };
+    </script>
+</body>
+</html>
